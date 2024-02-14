@@ -56,13 +56,23 @@ class NelsonSiegelSvensson:
         part1, part2, part3, part4, result = self.get_curve(tau1, beta0, beta1, beta2, beta3, tau2, self.n_max)
         time_steps = np.arange(1, self.n_max) / 12 
         # Plot each curve
-        
+        data = {
+                    'YTM': [0.039475, 0.042226, 0.043471, 0.044637, 0.047257, 0.044753],
+                    'TTM': [2, 4, 6, 9, 18, 30]
+                }
+
         
         plt.figure(figsize=(10, 6))  # Create a new figure for each plot
         plt.plot(time_steps, result, label=f'Yield Curve')
         plt.title(f'Nelson-Siegel Yield Curve')
         plt.xlabel('Time (Years)')
         plt.ylabel('Nelson-Siegel Result')
+                # Plotting the data
+        plt.plot(data["TTM"], data["YTM"], label = "Real Data")  # Note: positional arguments, not keywords
+
+        # Labeling the axes
+        plt.xlabel('Time to Maturity')
+        plt.ylabel('Yield to Maturity')
         plt.legend()
         st.pyplot(plt.gcf())
         
@@ -75,5 +85,9 @@ class NelsonSiegelSvensson:
         plt.title(f'Décomposition Nelson-Siegel Yield Curve')
         plt.xlabel('Time (Years)')
         plt.ylabel('Nelson-Siegel Result')
+        
+
+
         plt.legend()
         st.pyplot(plt.gcf())
+        
